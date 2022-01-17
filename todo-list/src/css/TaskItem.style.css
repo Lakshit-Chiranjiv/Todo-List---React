@@ -1,0 +1,15 @@
+.task-instance{
+    display: flex;
+    margin: 15px auto;
+    /* justify-content: space-between; */
+    align-items: center;
+}
+
+p{
+    font-size: 1.2em;
+    background-color: pink;
+}
+
+button{
+    background-color: blue;
+}
