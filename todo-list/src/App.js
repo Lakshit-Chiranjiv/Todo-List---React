@@ -1,6 +1,9 @@
 import './App.css';
-import React ,{ useState} from 'react'
-import TaskItem from './components/TaskItem';
+import React ,{ useState} from 'react';
+import { FaClipboardList } from "react-icons/fa";
+import AddTask from './components/AddTask';
+import TaskList from './components/TaskList';
+import WholeTodo from './components/WholeTodo';
 
 function App() {
 
@@ -8,26 +11,41 @@ function App() {
   const [currentTask,setCurrentTask] = useState("");
   
   const addTask = () =>{
-    setTodoList([...todoList,currentTask]);
+    if(currentTask)
+      setTodoList([...todoList,{todoName:currentTask,todoStatus:false}]);
   }
 
+  const setTypedTask = (value) =>{
+    setCurrentTask(value);
+  }
+
+  const deleteTask = (idx) => {
+      setTodoList(todoList.filter((tk,i) => i !== idx));
+  };
+
+  const toggleDone = (idx) => {
+    let newList = todoList;
+    newList[idx].todoStatus = !newList[idx].todoStatus;
+    setTodoList([...newList]);
+}
+
+ const clearTasks = () => {
+   let emptyArr = todoList;
+   emptyArr = [];
+   setTodoList([...emptyArr]);
+ }
+
   return (
+    // <WholeTodo/>
     <div className="App container">
-      <h1 className='m-5'>Todo List App</h1>
+      <h1 className='m-5'>Todo List App <FaClipboardList/> </h1>
+      <AddTask addTask={addTask} setTypedTask={setTypedTask} clearTasks={clearTasks} />
+      <TaskList tasks={todoList} deleteTask={deleteTask} toggleDone={toggleDone} />
 
-      <input type="text" className="form-control w-50 p-2 d-inline" placeholder='Add New Task!!' onChange={(e) => setCurrentTask(e.target.value)}/>
-      <button type="submit" className="btn btn-primary mx-3 w-25" onClick={addTask}>Add</button>
-      <hr />
-
-      <TaskItem/>
-      {/* {
-        displayToggle && 
-      <div className=ame="details">
-
-      </div>
-      } */}
     </div>
   );
 }
 
 export default App;
+
+

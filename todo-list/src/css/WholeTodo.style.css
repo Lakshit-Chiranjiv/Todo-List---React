@@ -1,0 +1,19 @@
+/* .done{
+    background-color: green;
+}
+
+.undone{
+    background-color: red;
+} */
+
+.eachtodo{
+    margin: 10px;
+}
+
+.eachtodo p{
+    color: white;
+}
+
+.nm{
+    text-decoration: line-through;
+}
